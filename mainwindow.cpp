@@ -22,7 +22,10 @@ MainWindow::MainWindow(QWidget *parent)
     db.setUserName("postgres");
     db.setPassword("1");
     if(!db.open())
+    {
+        qDebug()<<db.lastError().text();
         this->close();
+    }
 
     qry = new QSqlQuery(db);
     qry->prepare("select * from table1;");
